@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PlayButton from '@/components/PlayButton';
 import LyricRunner from '@/components/LyricRunner';
 import { sampleLyrics, totalDuration } from '@/data/sampleLyrics';
+import { ArrowLeft } from 'lucide-react';
 
 const Index = () => {
   const [showLyrics, setShowLyrics] = useState(false);
@@ -11,8 +12,22 @@ const Index = () => {
     setShowLyrics(true);
   };
 
+  const handleBack = () => {
+    setShowLyrics(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-spotify-dark">
+      {showLyrics && (
+        <button 
+          onClick={handleBack}
+          className="absolute top-6 left-6 text-white hover:text-spotify-DEFAULT transition-colors p-2 rounded-full hover:bg-white/10"
+          aria-label="Back"
+        >
+          <ArrowLeft size={24} />
+        </button>
+      )}
+      
       {!showLyrics ? (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white">Lyric Runner</h1>
