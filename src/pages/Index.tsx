@@ -14,10 +14,12 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-spotify-dark">
       {!showLyrics ? (
-        <div className="text-center animate-fade-in">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white">Lyric Runner</h1>
           <p className="text-lg mb-12 text-gray-300">Click play to start the lyrics</p>
-          <PlayButton onClick={handlePlay} className="animate-pulse" />
+          <div className="flex justify-center">
+            <PlayButton onClick={handlePlay} className="animate-pulse" />
+          </div>
         </div>
       ) : (
         <div className="w-full px-4 py-8 animate-slide-up">
