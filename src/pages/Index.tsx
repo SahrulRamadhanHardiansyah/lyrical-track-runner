@@ -21,7 +21,7 @@ const Index = () => {
         </div>
       ) : (
         <div className="w-full px-4 py-8 animate-slide-up">
-          <LyricRunner lyrics={sampleLyrics} totalDuration={totalDuration} />
+          <LyricRunner lyrics={sampleLyrics} totalDuration={totalDuration} autoPlay={true} />
         </div>
       )}
       

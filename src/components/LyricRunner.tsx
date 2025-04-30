@@ -11,10 +11,11 @@ interface Lyric {
 interface LyricRunnerProps {
   lyrics: Lyric[];
   totalDuration: number; // in milliseconds
+  autoPlay?: boolean;
 }
 
-const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPlay = false }) => {
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
   const timerRef = useRef<number | null>(null);
@@ -122,6 +123,7 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration }) => {
       <div 
         ref={containerRef}
         className="lyric-container w-full overflow-y-auto no-scrollbar px-4 py-8 text-center"
+        style={{ height: '50vh' }}
       >
         {lyrics.map((lyric, index) => (
           <div
@@ -137,9 +139,9 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration }) => {
       </div>
       
       <div className="w-full px-4 space-y-4">
-        <div className="progress-bar-container rounded-full">
+        <div className="progress-bar-container h-2 bg-gray-700 rounded-full">
           <div 
-            className="progress-bar rounded-full" 
+            className="progress-bar h-2 bg-spotify-DEFAULT rounded-full" 
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
