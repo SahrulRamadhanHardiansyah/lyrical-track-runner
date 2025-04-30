@@ -71,26 +71,31 @@
 .lyric-container {
   height: calc(100vh - 150px);
   overflow-y: hidden;
+  scroll-behavior: smooth;
 }
 
 .lyric-line {
   opacity: 0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 .lyric-line.active {
   opacity: 1;
   transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
 }
 
 .progress-bar-container {
   height: 4px;
   background-color: rgba(255, 255, 255, 0.1);
   width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .progress-bar {
   height: 100%;
   background-color: #1DB954;
-  transition: width 0.1s linear;
+  transition: width 0.2s ease-in-out;
+  border-radius: 4px;
 }

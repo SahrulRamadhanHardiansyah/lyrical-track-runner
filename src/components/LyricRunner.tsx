@@ -42,7 +42,7 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPl
   }, [currentTime, lyrics, currentLyricIndex]);
 
   useEffect(() => {
-    // Scroll to active lyric
+    // Scroll to active lyric with smooth behavior
     if (currentLyricIndex >= 0 && containerRef.current) {
       const container = containerRef.current;
       const element = container.children[currentLyricIndex] as HTMLElement;
@@ -52,9 +52,14 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPl
         const elementOffset = element.offsetTop;
         const elementHeight = element.clientHeight;
         
-        // Center the element in the container
+        // Center the element in the container with smooth scrolling
         const scrollPosition = elementOffset - (containerHeight / 2) + (elementHeight / 2);
-        container.scrollTop = scrollPosition;
+        
+        // Use smooth scrolling behavior
+        container.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
       }
     }
   }, [currentLyricIndex]);
@@ -129,8 +134,8 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPl
           <div
             key={index}
             className={cn(
-              "lyric-line text-2xl md:text-3xl my-8 transition-all duration-300",
-              currentLyricIndex === index ? "active text-white font-bold" : "text-gray-400"
+              "lyric-line text-2xl md:text-3xl my-8 transition-all duration-500 ease-in-out",
+              currentLyricIndex === index ? "active text-white font-bold scale-105" : "text-gray-400"
             )}
           >
             {lyric.text}
@@ -141,7 +146,7 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPl
       <div className="w-full px-4 space-y-4">
         <div className="progress-bar-container h-2 bg-gray-700 rounded-full">
           <div 
-            className="progress-bar h-2 bg-spotify-DEFAULT rounded-full" 
+            className="progress-bar h-2 bg-spotify-DEFAULT rounded-full transition-all duration-200 ease-in-out" 
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
@@ -151,7 +156,7 @@ const LyricRunner: React.FC<LyricRunnerProps> = ({ lyrics, totalDuration, autoPl
           
           <button
             onClick={togglePlayPause}
-            className="rounded-full bg-spotify-DEFAULT hover:bg-spotify-DEFAULT/90 p-3 flex items-center justify-center"
+            className="rounded-full bg-spotify-DEFAULT hover:bg-spotify-DEFAULT/90 p-3 flex items-center justify-center transition-all duration-200"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? (
